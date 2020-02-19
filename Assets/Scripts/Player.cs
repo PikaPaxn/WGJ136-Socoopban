@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         var hit = Physics2D.Raycast(transform.position, direction, 1f);
 
         if (hit.collider != null) {
-            Debug.Log("Obstacle found!", hit.collider.gameObject);
+            //Debug.Log("Obstacle found!", hit.collider.gameObject);
 
             //Box
             var box = hit.collider.GetComponent<Box>();

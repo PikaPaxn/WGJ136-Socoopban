@@ -8,7 +8,7 @@ public class Box : MonoBehaviour
         var hit = Physics2D.Raycast(transform.position, direction, 1f);
 
         if (hit.collider != null) {
-            Debug.Log("Obstacle collide against another!", gameObject);
+            //Debug.Log("Obstacle collide against another!", gameObject);
             return false;
         } else {
             transform.Translate(direction);
