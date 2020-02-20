@@ -6,10 +6,15 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    bool hasMove = false;
+    bool _hasMove = false;
+    Animator _animator;
+
+    void Start() {
+        _animator = GetComponent<Animator>();
+    }
 
     void LateUpdate() {
-        hasMove = false;
+        _hasMove = false;
     }
 
     void OnMove(InputValue value) {
@@ -17,8 +22,11 @@ public class Player : MonoBehaviour
         OnMove(v2);
     }
 
-    public bool OnMove(Vector2 direction) {
-        if (hasMove)
+    internal bool OnMove(Vector2 direction) {
+        if (GameManager.hasWin)
+            return false;
+
+        if (_hasMove)
             return true;
 
         //Define one direction
@@ -40,8 +48,7 @@ public class Player : MonoBehaviour
             var box = hit.collider.GetComponent<Box>();
             if (box != null) {
                 if (box.Move(direction.normalized)) {
-                    transform.Translate(direction.normalized);
-                    hasMove = true;
+                    _hasMove = true;
                 }
             }
 
@@ -49,16 +56,36 @@ public class Player : MonoBehaviour
             var player = hit.collider.GetComponent<Player>();
             if (player != null) {
                 if (player.OnMove(direction.normalized)) {
-                    transform.Translate(direction.normalized);
-                    hasMove = true;
+                    _hasMove = true;
                 }
             }
         } else {
             //Move in the direction
-            transform.Translate(direction.normalized);
-            hasMove = true;
+            _hasMove = true;
         }
 
-        return hasMove;
+        if (_hasMove) {
+            //Left or Right
+            if (direction.y == 0) {
+                if (direction.x < 0) {
+                    _animator.SetTrigger("Left");
+                } else if (direction.x > 0) {
+                    _animator.SetTrigger("Right");
+                }
+            
+            //Up or Down
+            } else {
+                if (direction.y < 0) {
+                    _animator.SetTrigger("Down");
+                } else if (direction.y > 0) {
+                    _animator.SetTrigger("Up");
+                }
+            }
+
+            //Move
+            transform.Translate(direction.normalized);
+        }
+
+        return _hasMove;
     }
 }
