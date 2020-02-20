@@ -6,6 +6,13 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    [System.Serializable]
+    public struct MyClip {
+        public AudioClip clip;
+        [Range(0f, 1f)]
+        public float volume;
+    }
+
     internal static bool hasWin = false;
 
     List<GoalPoint> _points = new List<GoalPoint>();
@@ -16,11 +23,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] string nextLevelName;
     [SerializeField] UnityEvent onWin;
 
+    [SerializeField] MyClip[] meows;
+    AudioSource _audioSource;
+
+    [SerializeField] Animator[] instructionBtns;
+    bool showInstructions = true;
+
     void Start()
     {
-        hasWin = false;
-        _points.Clear();
+        if (instructionBtns == null || instructionBtns.Length < 1)
+            showInstructions = false;
 
+        hasWin = false;
+        _audioSource = GetComponent<AudioSource>();
+
+        _points.Clear();
         var pointsGO = GameObject.FindGameObjectsWithTag("Goal Point");
         foreach(var go in pointsGO) {
             var point = go.GetComponent<GoalPoint>();
@@ -43,8 +60,13 @@ public class GameManager : MonoBehaviour
             _pointCounter--;
 
         if (_pointCounter == _points.Count) {
-            Debug.LogWarning("YOU WIN");
+            //Debug.LogWarning("YOU WIN");
             hasWin = true;
+
+            //Meow
+            var meow = meows[Random.Range(0, meows.Length)];
+            _audioSource.PlayOneShot(meow.clip, meow.volume);
+
             onWin.Invoke();
         }
     }
@@ -56,6 +78,13 @@ public class GameManager : MonoBehaviour
     public void MovePlayersRight() { MovePlayers(Vector2.right); }
 
     void MovePlayers(Vector2 dir) {
+        if (showInstructions) {
+            for (int i = 0; i < instructionBtns.Length; i++) {
+                instructionBtns[i].SetTrigger("Done");
+            }
+            showInstructions = false;
+        }
+
         foreach (var player in _players) {
             player.OnMove(dir);
         }

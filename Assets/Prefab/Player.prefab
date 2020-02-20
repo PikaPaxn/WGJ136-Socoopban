@@ -129,6 +129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c2851e22ca57543bc2f27047cac243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meows:
+  - clip: {fileID: 8300000, guid: c1630dfc32d773043b92760a5989527a, type: 3}
+    volume: 0.2
+  - clip: {fileID: 8300000, guid: 3db7abd87d7588f4bb183c2c251314f9, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 5c9dc3369da996049b74b89d70bedc14, type: 3}
+    volume: 1
 --- !u!61 &975233742562841375
 BoxCollider2D:
   m_ObjectHideFlags: 0
