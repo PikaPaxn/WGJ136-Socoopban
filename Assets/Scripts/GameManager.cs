@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
 
     List<Player> _players = new List<Player>();
 
-    public UnityEvent onWin;
+    [SerializeField] string nextLevelName;
+    [SerializeField] UnityEvent onWin;
 
     void Start()
     {
@@ -66,5 +67,9 @@ public class GameManager : MonoBehaviour
 
     public void BackToMenu() {
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void NextLevel() {
+        SceneManager.LoadScene(nextLevelName);
     }
 }
