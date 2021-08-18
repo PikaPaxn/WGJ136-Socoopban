@@ -3,7 +3,7 @@
 
 <img src="Promo/gameplay_mini.gif" width="350">
 
-*Pssh: Did you know you can [play it here?](https://paxncho1.itch.io/socoopban "Itch.io")*
+*Pssh: Did you know you can [play it here?](https://pikapaxn.itch.io/socoopban "Itch.io")*
 
 ## About
 
@@ -41,4 +41,4 @@ All props belong to their respective owners.... but that's lame to put, so let's
 
 Doing little games from time to time is quite fun, and put the time to take some screenshot and make some promo art to share with others is even funnier!
 
-Don't be afraid of hit me on [Twitter](https://twitter.com/paxncho1) if you need anything :)
+Don't be afraid of hit me on [Twitter](https://twitter.com/pikapaxn) if you need anything :)
